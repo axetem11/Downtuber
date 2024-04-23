@@ -1,3 +1,4 @@
+from flask import Flask
 import streamlit as st
 from pytube import YouTube
 from moviepy.editor import AudioFileClip
@@ -42,6 +43,7 @@ def download_video(yt, quality):
     else:
         return None
 
+# Main function to define the Streamlit app
 def main():
     # Title and background styling
     st.markdown(
@@ -120,5 +122,16 @@ def main():
     # Close the div for center-alignment
     st.markdown("</div>", unsafe_allow_html=True)
 
-if __name__ == "__main__":
+# Create a Flask app
+app = Flask(__name__)
+
+# Define a route for your Streamlit app
+@app.route('/')
+def streamlit_app():
+    # Call your Streamlit app's main function
     main()
+    return ''
+
+# Run the Flask app
+if __name__ == '__main__':
+    app.run()
